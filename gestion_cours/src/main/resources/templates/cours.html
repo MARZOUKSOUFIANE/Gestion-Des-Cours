@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="template">
+<head>
+<meta charset="utf-8">
+<title>Votre Ecole</title>
+
+<link rel="stylesheet" type="text/css"
+	href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	href="../static/css/style.min.css" th:href="@{/css/style.min.css}" />
+
+
+
+</head>
+<body>
+	<p></p>
+	<div layout:fragment="content">
+		<p></p>
+		<p></p>
+		<div class="container" style="display: flex">
+			<div class="col-md-6">
+				<div class="card">
+					<div id="test" class="card-header">Consultation des cours</div>
+					<div class="card-body">
+						<form th:action="@{/ens_cours}" method="get">
+							<div>
+								<label>Nom Enseignant</label> <input type="text" name="nom"
+									th:value="${nom}">
+								<button class="btn btn-primary" type="submit">Ok</button>
+							</div>
+						</form>
+						<div th:if="${exception}" th:text="${exception}"
+							class="text-danger"></div>
+					</div>
+				</div>
+				<p></p>
+				<p></p>
+
+				<div class="card">
+					<div class="card-header">Ajouter un Cours</div>
+					<div class="card-body">
+
+						<form th:action="@{/saveCours}" method="post">
+							<table class="table">
+
+
+								<tr>
+									<td>
+										<div>
+											<label><strong> Titre :</strong> </label> <input type="text"
+												name="titre" />
+
+										</div>
+									</td>
+
+								</tr>
+
+
+
+								<tr>
+									<td>
+										<div>
+											<label><strong>Horaire :</strong> </label> <input type="text"
+												name="horaire" />
+										</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<div>
+											<label><strong>Coefficient :</strong> </label> <input
+												type="text" name="coefficient" />
+										</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<div>
+											<label><strong>Enseignant :</strong> </label> <select
+												name="ensignant">
+												<option th:each="d:${ensignants}" th:value="${d.code}"
+													th:text="${d.nom}"></option>
+											</select>
+										</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<div>
+											<button type="submit" class="btn btn-primary">Valider</button>
+										</div>
+									</td>
+							</table>
+
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="card" style="margin-bottom: 100px">
+					<div class="card-header">Listes des Cours</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Code</th>
+									<th>Titre</th>
+									<th>Horaire</th>
+									<th>Coefficient</th>
+									<th>Enseignant</th>
+									<th></th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="p:${listCours}">
+									<td th:text="${p.code}"></td>
+									<td th:text="${p.titre}"></td>
+									<td th:text="${p.horaire}"></td>
+									<td th:text="${p.coefficient}"></td>
+									<td th:text="${p.ensignant.nom}"></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div>
+							<ul class="nav nav-pills">
+								<li th:each="page,status:${pages}"><a class="lien"
+									th:class="${pageCourante}==${status.index}?'nav-link active':'nav-link'"
+									th:href="@{/school(page=${status.index})}"
+									th:text="${status.index}"></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

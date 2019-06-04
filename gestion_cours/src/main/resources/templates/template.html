@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css"
+	href="../static/css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	th:href="@{/css/style.css}" />
+<title>Ma banque</title>
+
+</head>
+
+<body>
+	<header>
+		<div class="navbar navbar-expand navbar-light navbar-fluid"
+			style="background-color: #e3f2fd;">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<li class="nav-item"><a class="nav-link" th:href="@{/school}"><strong>Cours</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/ensignants}"><strong>Enseignants</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/departements}"><strong>Departements</strong></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/login?logout}" style="color: black;"><strong>LogOut</strong></a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<section layout:fragment="content"></section>
+	<footer class="navbar fixed-bottom navbar-light"
+		style="background-color: #e3f2fd;">
+		<hr />
+		<div class="container">
+			<small> Copyright @L'adresse de votre banque </small>
+		</div>
+	</footer>
+
+</body>
+
+
+</html>
